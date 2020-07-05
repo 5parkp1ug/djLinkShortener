@@ -14,7 +14,8 @@ venv/
 htmlcov/
 src/static_dist/
 src/static_root/
-.env
+backend/.env
+
 
 # Python compiled byte code
 *.pyc
