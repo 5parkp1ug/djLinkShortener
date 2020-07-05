@@ -4,10 +4,12 @@ services:
     image: dlsapi:0.1
     build:
       context: ./backend
-      dockerfile: Dockerfile
+      dockerfile: ./Dockerfile
     restart: on-failure
     volumes:
     - ./backend:/home/user/app/backend
+    - ./backend/static:/home/user/app/backend/static
+    - ./backend/media:/home/user/app/backend/media
     ports:
     - "8000:8000"
     links:
@@ -17,8 +19,10 @@ services:
     restart: on-failure
     volumes:
       - .db:/var/lib/postgresql/data
+    ports:
+    - 5432:5432
     environment:
-      - POSTGRES_USER=djlinkshortner
-      - POSTGRES_PASSWORD=djlinkshortner@123
-      - POSTGRES_DB=djlinkshortner
+      - POSTGRES_USER=djlinkshortener
+      - POSTGRES_PASSWORD=djlinkshortener@123
+      - POSTGRES_DB=djlinkshortener
 
