@@ -15,6 +15,9 @@ htmlcov/
 src/static_dist/
 src/static_root/
 backend/.env
+backend/media/
+backend/static/
+
 
 
 # Python compiled byte code

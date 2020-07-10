@@ -7,6 +7,7 @@ User = get_user_model()
 @admin.register(User)
 class UserAdmin(admin.ModelAdmin):
     list_display = ('id', 'first_name', 'last_name', 'email', 'profile_pic',)
+    readonly_fields = ('token', )
     fieldsets = (
         ('Basic Information', {
             'classes': ('extrapretty', 'grp-collapse grp-open',),
@@ -21,4 +22,11 @@ class UserAdmin(admin.ModelAdmin):
             'classes': ('grp-collapse grp-closed',),
             'fields': ('username', 'password', 'last_login',)
         }),
+        ('Auth Token', {
+            'classes': ('grp-collapse grp-closed',),
+            'fields': ('token',)
+        }),
     )
+
+    def token(self, obj):
+        return obj.auth_token
