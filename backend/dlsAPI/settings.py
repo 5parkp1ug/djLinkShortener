@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'debug_toolbar',
     'timezone_field',
+    'rest_auth',
 
     # Projects Apps
     'account',
@@ -140,8 +141,25 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
+APPEND_SLASH = False
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 MEDIA_URL = '/media/'
 
 IP_GEO_LOCATION_API_KEY = config('IP_GEO_LOCATION_API_KEY')
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+        # 'rest_framework.authentication.SessionAuthentication',
+    ),
+    'NON_FIELD_ERRORS_KEY': 'error',
+}
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+REST_AUTH_SERIALIZERS = {
+    'USER_DETAILS_SERIALIZER': 'account.serializers.UserSerializer',
+    'LOGIN_SERIALIZER': 'account.serializers.LoginSerializer',
+    'TOKEN_SERIALIZER': 'account.serializers.TokenSerializer',
+}
