@@ -15,9 +15,6 @@ class User(AbstractUser):
     # Fields
     profile_pic = models.ImageField(upload_to=get_profile_pic_path, blank=True, null=True)
 
-    class Meta:
-        pass
-
     def __str__(self):
         return self.get_full_name()
 

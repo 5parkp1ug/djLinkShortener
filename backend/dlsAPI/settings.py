@@ -28,6 +28,10 @@ SECRET_KEY = config('SECRET_KEY')
 DEBUG = config('DEBUG')
 
 ALLOWED_HOSTS = ['*']
+INTERNAL_IPS = [
+    '127.0.0.1',
+    '172.30.0.1',  # Docker IP
+]
 
 # User and Admin related config
 ADMINS = [
@@ -48,9 +52,12 @@ INSTALLED_APPS = [
     # 3rd Party Apps
     'rest_framework',
     'rest_framework.authtoken',
+    'debug_toolbar',
+    'timezone_field',
 
     # Projects Apps
     'account',
+    'shortener',
 ]
 
 MIDDLEWARE = [
@@ -62,6 +69,10 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+# DEBUG middlewares
+if DEBUG:
+    MIDDLEWARE.insert(0, 'debug_toolbar.middleware.DebugToolbarMiddleware')
 
 ROOT_URLCONF = 'dlsAPI.urls'
 
@@ -132,3 +143,5 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 MEDIA_URL = '/media/'
+
+IP_GEO_LOCATION_API_KEY = config('IP_GEO_LOCATION_API_KEY')
