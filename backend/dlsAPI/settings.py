@@ -38,7 +38,7 @@ ADMINS = [
     ('Abhishek Shandilya', 'schandilya.abhi007@gmail.com'),
 ]
 
-AUTH_USER_MODEL = 'account.User'
+AUTH_USER_MODEL = 'accounts.User'
 
 # Application definition
 INSTALLED_APPS = [
@@ -48,16 +48,20 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
 
     # 3rd Party Apps
     'rest_framework',
+    'rest_auth',
     'rest_framework.authtoken',
+    'allauth',
+    'allauth.account',
+    'rest_auth.registration',
     'debug_toolbar',
     'timezone_field',
-    'rest_auth',
 
     # Projects Apps
-    'account',
+    'accounts',
     'shortener',
 ]
 
@@ -159,7 +163,7 @@ REST_FRAMEWORK = {
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 REST_AUTH_SERIALIZERS = {
-    'USER_DETAILS_SERIALIZER': 'account.serializers.UserSerializer',
-    'LOGIN_SERIALIZER': 'account.serializers.LoginSerializer',
-    'TOKEN_SERIALIZER': 'account.serializers.TokenSerializer',
+    'USER_DETAILS_SERIALIZER': 'accounts.serializers.UserSerializer',
+    'LOGIN_SERIALIZER': 'accounts.serializers.LoginSerializer',
+    'TOKEN_SERIALIZER': 'accounts.serializers.TokenSerializer',
 }
