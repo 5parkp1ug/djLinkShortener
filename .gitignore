@@ -5,6 +5,7 @@
 .vscode
 .settings
 .DS_Store
+coverage
 
 # http request files for Idea
 http-client.private.env.json
