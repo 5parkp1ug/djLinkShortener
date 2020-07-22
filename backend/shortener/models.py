@@ -50,9 +50,6 @@ class Link(models.Model):
         self.updated_at = timezone.now()
         return super().save(*args, **kwargs)
 
-    class Meta:
-        indexes = ('keyword', )
-
 
 class Country(models.Model):
     """Model to store country related information"""
