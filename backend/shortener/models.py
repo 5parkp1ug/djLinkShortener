@@ -6,7 +6,7 @@ from django.utils import timezone
 
 from timezone_field import TimeZoneField
 
-from backend.utils.link_code_generator import get_link_code
+from utils.link_code_generator import get_link_code
 
 
 User = get_user_model()
@@ -29,9 +29,14 @@ class Link(models.Model):
     Model to store the customer created links
     """
     keyword = models.CharField(max_length=10, default=get_link_code, unique=True, help_text='Unique keywork for the link')
+    deep_link = models.URLField()
     created_at = models.DateTimeField()
     updated_at = models.DateTimeField()
-    description = models.CharField('Short description about the link', max_length=100, null=True, blank=False)
+
+    # social tags
+    title = models.CharField(max_length=70, blank=True, null=True)
+    image = models.ImageField(blank=True, null=True)
+    description = models.CharField(max_length=150, blank=True, null=True)
 
     created_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='links')
     labels = models.ManyToManyField(Label, related_name='associated_links', blank=True)
@@ -44,6 +49,9 @@ class Link(models.Model):
             self.created_at = timezone.now()
         self.updated_at = timezone.now()
         return super().save(*args, **kwargs)
+
+    class Meta:
+        indexes = ('keyword', )
 
 
 class Country(models.Model):

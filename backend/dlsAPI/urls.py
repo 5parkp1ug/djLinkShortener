@@ -8,18 +8,22 @@ from django.contrib import admin
 from django.urls import path, include, re_path
 from rest_auth.views import PasswordResetConfirmView
 
+from backend.shortener.views import MainRedirectView
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('auth/', include('rest_auth.urls')),
-    path('auth/registration/', include('rest_auth.registration.urls')),
+    path('api/auth/', include('rest_auth.urls')),
+    path('api/auth/registration/', include('rest_auth.registration.urls')),
     re_path(
-        r'^auth/password/reset/confirm/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
+        r'^api/auth/password/reset/confirm/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
         PasswordResetConfirmView.as_view(),
         name='password_reset_confirm'),
     url(r'^rest-auth/registration/', include('rest_auth.registration.urls'), name='account_signup'),
 
     # accounts url
-    path('', include('accounts.urls', namespace='accounts'))
+    path('api/', include('shortener.urls', namespace='shortener')),
+
+    path('<str:keyword>/', MainRedirectView.as_view(), name='redirect-view'),
 
 ]
 

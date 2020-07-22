@@ -6,6 +6,9 @@
 .settings
 .DS_Store
 
+# http request files for Idea
+http-client.private.env.json
+
 # Random files
 *~
 \#*

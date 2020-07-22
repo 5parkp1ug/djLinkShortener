@@ -10,7 +10,7 @@ class UserAdmin(admin.ModelAdmin):
     readonly_fields = ('token', )
     fieldsets = (
         ('Basic Information', {
-            'classes': ('extrapretty', 'grp-collapse grp-open',),
+            'classes': ('grp-collapse grp-open',),
             'fields': (('first_name', 'last_name'), 'email',
                        ('profile_pic', 'date_joined'))
         }),
